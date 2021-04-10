@@ -11,24 +11,35 @@ class VehicleDao{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    
-
-    public function POST($vehicle){
+  
+    public function Post($vehicle){
         if($vehicle){
             try{
-                    
-                $this->query = 'INSERT INTO vehicles(model,plate,color,nameCli,phone)
-                                values(:model,:plate,:color,:name,:phone)';
-
+                if(!$vehicle->getId()){
+                    $this->query = 'INSERT INTO vehicles(client_id,plate,model,color)
+                    values(:cli,:plate,:model,:color)';
+                }  
+                else{
+                    $this->query = "UPDATE vehicles SET plate=:plate, model=:model, color=:color WHERE id =:id";
+                }
+              
+                $obj = $vehicle->getClient();
+    
                 $con = new ConnectDb();
                 $stmt = $con->getCon()->prepare($this->query);
-                $this->setParams($stmt, array(
-                                              ":model"      =>     strtoupper($vehicle->getModel()),
-                                              ":plate"      =>     strtoupper($vehicle->getPlate()),
-                                              ":color"      =>     strtoupper($vehicle->getColor()),
-                                              ":name"       =>     strtoupper($vehicle->getOwner()),
-                                              ":phone"      =>     $vehicle->getPhone()));
+                $params = array(
+                                ":cli"        =>     (int)$obj->id,
+                                ":plate"      =>     strtoupper($vehicle->getPlate()),
+                                ":model"      =>     strtoupper($vehicle->getModel()),                                 
+                                ":color"      =>     strtoupper($vehicle->getColor()));
+
+                if($vehicle->getId()){
+                    $params[':id'] = (int)$vehicle->getId();
+                    echo $this->query."<br>";
+                    unset($params[":cli"]);
+                }        
+                
+                $this->setParams($stmt, $params);
 
             return $stmt->execute();
 

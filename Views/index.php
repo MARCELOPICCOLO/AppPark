@@ -58,8 +58,7 @@ include_once('../DAO/ClientDao.php');
                        foreach($items as $i){
                                                  
                             $client = $cliDao->getClient($i['client_id']);
-
-
+                            
                             echo "<tr>
                                       <td>".$i['plate']."</td>
                                       <td>".$i['model']."</td>

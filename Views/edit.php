@@ -1,12 +1,16 @@
 <?php
 include_once('../Models/Vehicle.php');
+include_once('../Models/Client.php');
 include_once('../DAO/VehicleDao.php');
+include_once('../DAO/ClientDao.php');
 
 $veic = new Vehicle();
 $veicDao = new VehicleDao();
+$cliDao = new ClientDao();
 
 if($_GET['id']){
-    $res = $veicDao->getVehicle($_GET['id']); 
+    $res = $veicDao->getVehicle($_GET['id']);
+    $client = $cliDao->getClient($res['client_id']);
 }
 
 ?>
@@ -32,6 +36,8 @@ if($_GET['id']){
             <div class="add">
                <h4>Editar Cadastros</h4> 
                 <form action="../Controllers/SaveVehicle.php" method="POST">
+                <input type="hidden" class="form-control" id="" name="idPark" maxlength="7" value="<?php echo $res['id']?>">
+                <input type="hidden" class="form-control" id="" name="idCli" maxlength="7" value="<?php echo $res['client_id']?>">
                     <div class="form-group">
                         <label for="Plate">Placa</label>
                         <input type="text" class="form-control" id="" name="Plate" maxlength="7" value="<?php echo $res['plate']?>" style="width:20%; height:25px">
@@ -59,12 +65,12 @@ if($_GET['id']){
 
                     <div class="form-group">
                         <label for="client">Proprietário</label>
-                        <input type="text" class="form-control" name="nameCli" id="" maxlength="45" value="<?php echo $res['nameCli']?>" style="width:60%; height:25px">
+                        <input type="text" class="form-control" name="nameCli" id="" maxlength="45" value="<?php echo $client['nome']?>" style="width:60%; height:25px">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Contato</label>
-                        <input type="text" class="form-control" id="" name="phone" maxlength="14" value="<?php echo $res['phone']?>" placeholder="(00) 00000-0000" style="width:30%; height:25px">
+                        <input type="text" class="form-control" id="" name="phone" maxlength="14" value="<?php echo $client['phone']?>" style="width:30%; height:25px">
                     </div>
 
                     <div class="form-group">

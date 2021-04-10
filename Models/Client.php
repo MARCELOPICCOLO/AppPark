@@ -26,6 +26,6 @@ Class Client{
     }
 
     public function setPhone($value){
-        $this->id=$phone;
+        $this->phone=$value;
     }
 }

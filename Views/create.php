@@ -1,8 +1,3 @@
-<?php
-include_once('../Models/Vehicle.php');
-include_once('../DAO/VehicleDao.php');
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
