@@ -53,7 +53,7 @@ class VehicleDao{
         }
     }
 
-    function getVehicle($id){
+    public function getVehicle($id){
         try{
             $con = new ConnectDb();
             $this->query = "SELECT * FROM vehicles WHERE id = :id";
@@ -67,7 +67,29 @@ class VehicleDao{
         }
     }
 
-    function setParams($stmt, $params = array()){
+    public function delete($id){
+        try{
+            $this->query = "DELETE FROM vehicles WHERE id = :id";
+            $con = new ConnectDb();
+            $stmt = $con->getCon()->prepare($this->query);
+            $this->setParams($stmt,array(":id" => $id));
+            return $stmt->execute();
+
+        }catch(PDOException $e){
+            echo "error on delete -> ".$e->getMessage();
+        }
+    }
+
+    public function setFavorite($id,$value){
+        $this->query = "UPDATE vehicles SET isFavorite=:value WHERE id=:id";
+        $con = new ConnectDb();
+        $stmt = $con->getCon()->prepare($this->query);
+        $this->setParams($stmt, array(":id"      =>    $id,
+                                      ":value"   =>    (int)$value));
+        return $stmt->execute();
+    }
+
+    private function setParams($stmt, $params = array()){
         foreach($params  as $key => $val){
             $stmt->bindValue($key,$val);
         }

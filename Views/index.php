@@ -14,7 +14,7 @@ include_once('../DAO/ClientDao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/Style.css">
+    <link rel="stylesheet" href="../styles/Style.css?v=2">
     <title>Parking</title>
 </head>
 <body>
@@ -70,10 +70,10 @@ include_once('../DAO/ClientDao.php');
                                        <a href=delete.php?id=".$i['id']."><i class='far fa-trash-alt' style='font-size:24px; margin-left:15px'></i></a>";
 
                                         if($i['isFavorite']==0){
-                                            echo "<i class='far fa-star' style='font-size:24px; margin-left:15px'></i></td></tr>";
+                                            echo "<a href=../Controllers/setFavorite.php?id=".$i['id']."><i class='far fa-star' style='font-size:24px; margin-left:15px'></i></td></tr>";
                                         }
                                         else{
-                                            echo "<i class='fas fa-star' style='font-size:24px; color:orange;margin-left:15px'></i></i></td></tr>";
+                                            echo "<a href=../Controllers/setFavorite.php?id=".$i['id']."><i class='fas fa-star' style='font-size:24px; color:orange;margin-left:15px'></i></i></td></tr>";
                                         }
                        }
                        //endforeach
