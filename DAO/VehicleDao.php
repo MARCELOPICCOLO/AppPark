@@ -11,6 +11,15 @@ class VehicleDao{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function GetFilter($value){
+        $this->query = "SELECT * FROM vehicles WHERE plate like :val";
+        $con = new ConnectDb();
+        $stmt = $con->getCon()->prepare($this->query);
+        $this->setParams($stmt, array(":val"        =>       $value."%"));
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
   
     public function Post($vehicle){
         if($vehicle){

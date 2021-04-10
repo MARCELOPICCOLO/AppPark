@@ -30,6 +30,12 @@ include_once('../DAO/ClientDao.php');
                         <i class="fas fa-plus"></i>
                         <i class='fas fa-car' style='font-size:24px'></i>
                 </button></a>
+                <?php
+                     for($i='A';$i!='AA';$i++){
+                        echo "<a href=index.php?filter=$i class=mx-1>[$i]</a>";
+                    }
+                    echo '<a href="index.php" class=mx-1>[TODOS] </a>';
+                ?>
             </div>
 
         </header>
@@ -53,7 +59,13 @@ include_once('../DAO/ClientDao.php');
                    $vehicleDao = new VehicleDao();
                    $cliDao = new ClientDao();
                    $client = new Client();
+                   if(isset($_GET['filter'])){
+                    $items = $vehicleDao->GetFilter($_GET['filter']);
+
+                   }else{
                     $items = $vehicleDao->Get();
+                   }
+                    
 
                        foreach($items as $i){
                                                  
