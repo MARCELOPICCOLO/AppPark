@@ -1,0 +1,68 @@
+*{
+    margin:0px;
+    padding: 0px;
+    text-decoration: none;
+    box-sizing: content-box;
+}
+
+a{
+    color: #212529
+}
+
+.filter > a> button{
+ 
+    outline: none;
+    background-color:#212529 ;
+    width:60px;
+    height:60px; 
+    border-radius:50px;
+    border:none;
+    color:white
+}
+
+h4{
+    color:#212529;
+}
+.title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filter{
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    margin: 20px auto
+}
+
+.secTable{
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/*create*/
+
+.add{
+    max-width: 600px;
+    width: 60%;
+    margin: 20px auto;
+    height: 400px;
+    padding: 20px;
+}
+
+input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #212529;
+    outline: none;
+}
+
+select{
+    border: none
+}
+
+input[type="text"]:focus{
+    box-shadow: 0 0 0 0;
+    border-bottom: 1px solid #212529;
+    outline: 0;
+}
